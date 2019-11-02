@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js">
+    </script>
+    <style>
+        body{
+            background-color:#e74c3c;
+            width: 100%;
+            height: 100%;
+
+        }
+        section{
+            background-color: whitesmoke;
+            width: 450px;
+            height: 300px;
+            position: relative;
+            margin: 150px auto auto auto;
+            border-radius: 3px;
+        }
+        .content{
+            background-color: yellow;
+        }
+        .athor{
+            background-color: pink;
+        }
+        a{
+            background-color: #e74c3c;
+            width: 100px;
+            height: 30px;
+            border-radius: 3px;
+            line-height: 30px;
+            text-align: center;
+            text-decoration: none;
+            margin: 10px;
+            float:right;
+        }
+        .share{
+            float: left;
+            width: 50px;
+        }
+    </style>
+
+    <script>
+        function inIframe () { try { return window.self !== window.top; } catch (e) { return true; } }
+
+var currentQuote = '', currentAuthor = '';
+function openURL(url){
+  window.open(url, 'Share', 'width=550, height=400, toolbar=0, scrollbars=1 ,location=0 ,statusbar=0,menubar=0, resizable=0');
+}
+function getQuote() {
+  $.ajax({
+    headers: {
+      "X-Mashape-Key": "OivH71yd3tmshl9YKzFH7BTzBVRQp1RaKLajsnafgL2aPsfP9V",
+      Accept: "application/json",
+      "Content-Type": "application/x-www-form-urlencoded"
+    },
+    url: 'https://andruxnet-random-famous-quotes.p.mashape.com/cat=',
+    success: function(r) {
+      if (typeof r === 'string') {
+       r = JSON.parse(r); 
+      }
+      if (Array.isArray(r)) {
+       r = r[0];
+      }
+      currentQuote = r.quote;
+      currentAuthor = r.author;
+      if(inIframe())
+      {
+        $('#tweet-quote').attr('href', 'https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + encodeURIComponent('"' + currentQuote + '" ' + currentAuthor));
+        $('#tumblr-quote').attr('href', 'https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp&caption='+encodeURIComponent(currentAuthor)+'&content=' + encodeURIComponent(currentQuote)+'&canonicalUrl=https%3A%2F%2Fwww.tumblr.com%2Fbuttons&shareSource=tumblr_share_button');
+      }
+    }
+  });
+}
+$(document).ready(function() {
+  getQuote();
+  $('#newQuote').on('click', getQuote);
+  $('#tweet-quote').on('click', function() {
+    if(!inIframe()) {
+      openURL('https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=' + encodeURIComponent('"' + currentQuote + '" ' + currentAuthor));
+    }
+  });
+  $('#tumblr-quote').on('click', function() {
+    if(!inIframe()) {
+      openURL('https://www.tumblr.com/widgets/share/tool?posttype=quote&tags=quotes,freecodecamp&caption='+encodeURIComponent(currentAuthor)+'&content=' + encodeURIComponent(currentQuote)+'&canonicalUrl=https%3A%2F%2Fwww.tumblr.com%2Fbuttons&shareSource=tumblr_share_button');
+    }
+  });
+});
+    </script>
+
+</head>
+<body>
+    <div class="background">
+        <section>
+            <div class="content">
+
+            </div>
+            <div class="athor">
+
+            </div>
+            <div>
+                <a class="share" href="" title="分享到微博">微博</a>
+                <a class="share" href="" title="分享到朋友圈">朋友圈</a>
+                <a id="newQuote" href="">New Quote</a>
+            </div>
+        </section>
+
+    </div>
+</body>
+</html>

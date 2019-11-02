@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            width: 600px;
+            height: 200px;
+            background-color: blue;
+            margin: 100px auto;
+            border: solid 1px #000;
+            overflow: hidden;
+        }
+
+        ul {
+            list-style: none;
+            width: 1800px;
+            height: 200px;
+            background-color: rgba(255, 0, 0, 0.5);
+        }
+
+        ul>li {
+            float: left;
+        }
+
+        img {
+            width: 300px;
+        }
+    </style>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.0.js"> </script>
+    <script>
+        $(function () {
+            var offSet = 0;
+            var timer;
+
+            function autoPlay() {
+                timer=setInterval(function () {
+                    offSet += -10;
+                    if (offSet <= -1200) {
+                        offSet = 0;
+                    }
+
+                    $("ul").css("marginLeft", offSet)
+                }, 50)
+            }
+            autoPlay();
+            $("li").hover(function () {
+                clearInterval(timer);
+            }, function () {
+                autoPlay();
+            })
+
+
+
+        })
+    </script>
+</head>
+
+<body>
+    <div>
+        <ul>
+            <li><img src="/Users/duweigang/Desktop/test/0918/coffee1.jpeg"></li>
+            <li><img src="/Users/duweigang/Desktop/test/0918/coffee2.jpeg"></li>
+            <li><img src="/Users/duweigang/Desktop/test/0918/coffee3.jpeg"></li>
+            <li><img src="/Users/duweigang/Desktop/test/0918/coffee4.jpeg"></li>
+            <li><img src="/Users/duweigang/Desktop/test/0918/coffee1.jpeg"></li>
+            <li><img src="/Users/duweigang/Desktop/test/0918/coffee2.jpeg"></li>
+        </ul>
+    </div>
+</body>
+
+</html>

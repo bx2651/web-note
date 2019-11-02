@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .box {
+            width: 240px;
+            height: 200px;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .text li {
+            float: left;
+            width: 60px;
+            margin: 0 auto;
+            background-color: orange;
+        }
+
+        img {
+            width: 240px;
+        }
+
+        .show {
+            display: block;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .color {
+            background-color: gray;
+        }
+    </style>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+    <script>
+        $(function () {
+            $(".text>li").mouseenter(function () {
+                $(this).addClass("color");
+                $(this).siblings().removeClass("color")
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div class="box">
+        <div>
+            <ul class="text">
+                <li>张三</li>
+                <li>李四</li>
+                <li>王五</li>
+                <li>赵六</li>
+            </ul>
+        </div>
+        <div>
+            <ul class="img">
+                <li class="show"><img src="/Users/duweigang/Desktop/test/0918/coffee1.jpeg"></li>
+                <li class="hide"><img src="/Users/duweigang/Desktop/test/0918/coffee2.jpeg"></li>
+                <li class="hide"><img src="/Users/duweigang/Desktop/test/0918/coffee3.jpeg"></li>
+                <li class="hide"><img src="/Users/duweigang/Desktop/test/0918/coffee4.jpeg"></li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>
