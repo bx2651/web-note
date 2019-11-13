@@ -1,11 +1,11 @@
-#call/apply/bind
+# call/apply/bind
 
-###call()和apply()的作用
+### call()和apply()的作用
 
-**改变this的指向
+** 改变this的指向
 实现继承(调用函数)**
 
-##call()和aplly()的相同点：
+## call()和aplly()的相同点：
 
 这两个方法都是函数对象的方法，需要通过函数对象来调用。
 当函数调用call和apply时会立刻执行。
@@ -29,7 +29,7 @@
 
 
 
-###call()和apply()的区别
+### call()和apply()的区别
 call()和apply()方法都可以将实参在对象之后依次传递，但是apply()方法需要将实参封装到一个数组中统一传递（即使只有实参只有一个，也要放到数组中）。
 
 比如针对下面这样的代码：
@@ -67,7 +67,7 @@ var min = Math.min.apply(Math,arr)
 console.log(max,min)
 ```
 
-##bind：
+## bind：
 
 1.bind（）不是立即执行函数，是在需要时才调用的。
 2.bind（）不会调用函数。
@@ -93,7 +93,7 @@ console.log(max,min)
 ```
 
 
-##三者的主要应用场景
+## 三者的主要应用场景
 
 1.call常用作继承
 2.apply经常与数组有关，比如借助数学对象实现数组最大值和最小值。
