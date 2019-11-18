@@ -1,16 +1,16 @@
-#Vue.js
+# Vue.js
 1.vue是目前最火的前端框架；react是最流行的前端框架(react可以进行手机app和网站的开发，vue借助weex也可以进行手机app开发)
 2.前端三大框架：vue,react,angular
 3.vue是进行构建前端页面的的框架，只关注视图层
 
-##vue的特点和高级功能
+## vue的特点和高级功能
 1.解耦视图和数据
 2.可复用的组件
 3.前端路由技术
 4.状态管理
 5.虚拟DOM
 
-##vue中的MVVM
+## vue中的MVVM
 
 
 
@@ -43,8 +43,8 @@
 </html>
 ```
 
-##Vue的系统指令
-###v-cloak和v-text
+## Vue的系统指令
+### v-cloak和v-text
 **相同点：**都没有闪烁问题
 
 **不同点：**1.两者虽然都没有闪烁问题，但是解决闪烁问题的原理不同。
@@ -63,7 +63,7 @@ v-text是通过属性绑定数据插入到页面中，不存在插值表达式
 
 v-text会覆盖元素中原本的内容
 
-###v-html
+### v-html
 v-html会被解析为html元素
 
 ```
@@ -99,7 +99,7 @@ v-html会被解析为html元素
 </html>
 ```
 
-###v-once
+### v-once
 加上v-once后，页面中的插值表达式的值不随着data数据的变化而变化。
 ```
 <div id="app">
@@ -116,13 +116,13 @@ v-html会被解析为html元素
 </script>
 ```
 
-###v-pre
+### v-pre
 ```
 类似于<pre></pre>的标签，不解析内容，直接将内容原封不动的展示出来。
 <h1 v-pre>{{msg}}</h1> //显示为{{msg}}
 ```
 
-###v-bind:属性绑定
+### v-bind:属性绑定
 动态的给属性添加值，比如网页上的图片往往都不会写死，而是动态的获取地址，vue实例通过解析服务器返回来的数据获取到图片的url,通过v-bind绑定到src属性上，当地址发生改变时，页面上的图片也会随之更新。
 
 ```
@@ -186,7 +186,7 @@ v-bind:value可简写为:value
 </body>
 ```
 
-####v-on:事件绑定
+#### v-on:事件绑定
 ```
 <!DOCTYPE html>
 <html lang="en">
@@ -249,7 +249,7 @@ v-on的常用事件：
 
 @submit
 
-#####v-on事件修饰符：
+##### v-on事件修饰符：
 
 v-on 提供了很多事件修饰符来辅助实现一些功能。事件修饰符有如下：
 
@@ -293,7 +293,7 @@ PS：一个事件，允许同时使用多个事件修饰符。
         <button @click.stop.prevent="doThis"></button>
         
 ```
-###跑马灯
+### 跑马灯
 ```
 <!DOCTYPE html>
 <html lang="en">
@@ -407,7 +407,7 @@ v-model实现的是双向数据绑定，可以实现数据的双向同步，但�
 </html>
 ```
 
-###v-for循环遍历
+### v-for循环遍历
 
 ```
 <body>
@@ -436,7 +436,7 @@ v-model实现的是双向数据绑定，可以实现数据的双向同步，但�
 
 
 
-###v-if和v-else
+### v-if和v-else
 
 ```
 <!DOCTYPE html>
@@ -472,7 +472,7 @@ v-model实现的是双向数据绑定，可以实现数据的双向同步，但�
 
 </html>
 ```
-###v-if和v-show
+### v-if和v-show
 
 区别：当条件为false时，v-if本质上不存在DOM中，v-if每次都会重新添加/删除元素，而v-show是加了一个display：none的属性
 

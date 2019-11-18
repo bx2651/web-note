@@ -1,4 +1,4 @@
-#计算属性和methods方法
+# 计算属性和methods方法
 computed属性用来定义函数，在命名时一般不加动词，methods中的函数一般在命名时加动词。
 
 计算属性在插值表达式调用时不需要加小括号，可以直接使用，而methods在使用时需要加括号。
@@ -63,7 +63,7 @@ computed属性用来定义函数，在命名时一般不加动词，methods中�
 </html>
 ```
 
-##计算属性的setter和getter方法
+## 计算属性的setter和getter方法
 
 ```
 <!DOCTYPE html>
