@@ -356,12 +356,14 @@ VM实例，会监听自己身上 data 中所有数据的改变，只要数据一
 
 这样做的好处是：程序员只需要关心数据，不需要考虑如何重新渲染DOM页面；减少DOM操作
 
-###v-model
+### v-model
 v:bind实现的是数据的单向绑定，从M自动绑定到V
 
 v-model实现的是双向数据绑定，可以实现数据的双向同步，但只能用在表单元素当中。
 
-常见的表单元素包括：input(radio, text, address, email....) 、select、checkbox 、textarea。
+常见的表单元素包括：input(radio（当v-model和radio绑定了同一个值的时候，不需要绑定name属性，也可以做到互斥，单选框对应的是布尔值）, text, address, email....) 、select、checkbox（多选框对应的是数组） 、textarea。
+
+（label标签的好处：label标签的for属性和表单元素的id属性绑定，可以聚焦，一般都会写）
 
 代码举例：
 
@@ -406,6 +408,12 @@ v-model实现的是双向数据绑定，可以实现数据的双向同步，但�
 
 </html>
 ```
+
+v-model.lazy:不实时绑定，敲回车的时候绑定
+
+v-model。number:在默认情况下赋值都是string类型，可以通过v-model.number将默认类型改为number类型
+
+v-model.trim修饰符:去掉字符串中的空格
 
 ### v-for循环遍历
 
