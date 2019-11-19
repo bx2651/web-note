@@ -734,7 +734,7 @@
                             template: '#ccpn',
                             methods: {
                                 btnClick() {
-                                    //1.访问父组件
+                                    //1.访问根组件中的massage
                                     console.log(this.$root.massage);
                                 }
                             }
