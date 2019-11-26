@@ -30,6 +30,10 @@ margin-left: 1000px;
 ```
 
 # 清除浮动的方法：
+要介绍清除浮动的方法，首先应该了解一下为什么会有浮动，以及元素浮动之后会产生什么样的效果：
+
+最初产生浮动是为了解决图文混排的，左边图片，右边文字比较美观。但是当子元素浮动后，子元素脱离的标准流，不再能撑得起来父容器的高度，导致父容器塌陷，
+
 1.隔墙法:在最后一个浮动标签后，新加一个块级元素，给其设置clear：both（不推荐，不符合结构样式分离的思想，且可读性较差）
 内墙法可以让上面的盒子使用margin-bottom并且第二个盒子使用margin-top属性，而外墙法第一个盒子无法使用margin-bottom,因为外墙法无法撑起第一个盒子的高度
 ```
@@ -94,11 +98,11 @@ margin-left: 1000px;
 ```
 
     .clearfix:after{/*伪元素是行内元素 正常浏览器清除浮动方法*/
-        content: "";
-        display: block;
-        height: 0;
-        clear:both;
-        visibility: hidden;
+        content: "";//必须存在
+        display: block;//必须是块级元素才能清除两侧浮动，如果该元素原本就是块级元素，则可以省略
+        clear:both;//清除两侧浮动
+        height: 0;//属性可以省略
+        visibility: hidden;//可以将这个盒子隐藏，但是其实已经设置了内容为空，高度为0，所以不是必须的
     }
     .clearfix{
         *zoom: 1;/*ie6清除浮动的方式 *号只有IE6-IE7执行，其他浏览器不执行*/
@@ -137,4 +141,30 @@ margin-left: 1000px;
 ```
 
 5.给父盒子设置Height属性
+
+# 未知宽高的元素上下左右居中
+
+1.绝对定位+transform属性
+
+```
+.box{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+```
+
+2.绝对定位(相当于强制将盒子的大小调整为当前窗口的大小)
+
+```
+.box {
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+margin: auto;
+}
+```
 
