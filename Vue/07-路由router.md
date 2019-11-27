@@ -143,12 +143,14 @@ const routes={
 	path:'/home',
 	component:Home,
 	meta:{
-		title:'首页'
+		title:'首页'//2.在所有需要修改标题的路径下面加meta属性，属性内部写需要修改的title标题。
 	}
 }
 
+
+//1.调用router.beforeEach的函数。注意点：这个函数原本是自动执行的，其内部会调用next函数，但由于我们现在手动调了它用，导致手动调用的覆盖了原来的函数，所以我们在调用时必须执行一下next函数。
 router.beforeEach(to,from,next){
-	document.title = to.meta.title//拿不到最外层的页面的标题
+	document.title = to.meta.title//由于当前存在路由嵌套，所以会拿不到最外层的页面的标题首页
 	document.title = to.matched[0].meta.title
 	next()//前置钩子必须调next
 }
