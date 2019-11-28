@@ -12,7 +12,7 @@ $.get(`https://api.github.com/users/${user}/repos`, data => {
 })
 
 ```
-! [avator](../img/promise1.jpeg)
+![](../img/promise1.jpeg)
 
 我们可以看到，这个返回结果跟我们想的并不一样，返回数据的顺序是不确定的。为了确保第二个请求是在第一个请求之后发生的，我们会把第二个请求写到第一个请求的回调当中。像这样：
 
