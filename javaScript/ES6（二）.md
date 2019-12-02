@@ -289,3 +289,118 @@ class Dog extends Animal{
 
 const lucky = new Dog('lucky',2)
 ```
+
+## Proxy
+
+帮助我们重写对象上的默认方法，定义自己的逻辑。可以通过重写这些方法来使这些对象符合自己的需求,然后再写在相对应的对象上。
+
+```
+const phoneHandler = {
+  set(target,key,value){
+    target[key]=value.match(/[0-9]/g).join('');
+  },
+  get(target,key){
+    return target[key].replace(/(\d{3})(\d{4})(\d{4})/,'$1-$2-$3')
+  }
+}
+
+//第一个参数为target，要代理的目标对象
+//第二个参数包含了要重写的操作
+const phoneNumber = new Proxy({},phoneHandler)
+
+```
+
+![](../img/Proxy.png)
+
+```
+
+const safeHandler = {
+  set(target,key,value){
+    const likeKey = Object.keys(target).find(k => k.toLowerCase() ===key.toLowerCase());
+    if(!(key in target) && likeKey){
+      throw new Error(`looks like we already have a property ${key} but with case of ${likeKey}`)
+    }
+    target[key] = value
+  }
+}
+const safetyProxy = new Proxy({} , safeHandler)
+
+safetyProxy.ID=5;
+
+```
+
+![](../img/Proxy2.png)
+
+## Set
+
+set可以看做是唯一的数组，你只能添加一个元素一次，这就意味着你添加重复的元素时它不会有任何的反应。set不能通过索引获取值。
+
+* .add 添加元素
+* .delete 删除元素
+* .has 判断是否有某一个元素
+* .clear 清除所有元素
+
+```
+const colors = new Set(["red","green","blue"])
+colors.add("white")
+colors.add("black")
+colors.delete("white")
+colors.has("white")
+colors.clear()
+```
+
+借助set唯一性的特性，我们可以用它对数组进行去重。
+
+```
+const arr = [1,1,2,3,4,5,5,5]
+
+const arrSet = new Set(arr)
+console.log(arrSet)//是一个set对象，可以通过[...arrSet]将其转换为数组
+console.log(arr)
+
+```
+![](../img/Set.png)
+
+### weakSet
+
+和set的区别
+* 元素必须是对象，而不能是其他类型
+* 不能通过for of循环，因为并未配置iterator迭代器
+* 没有clear的方法，但是可以自己clean,避免内存泄露
+
+```
+let jelly = {name:"jelly",age:18};
+let baixue = {name:"baixue",age:17}
+
+const people = [jelly,baixue]
+
+console.log(people)
+baixue = null 
+console.log(people)
+```
+![](../img/weakSet1.png)
+
+```
+let jelly = {name:"jelly",age:18};
+let baixue = {name:"baixue",age:17}
+
+const weakPeople = new WeakSet([jelly,baixue])
+
+console.log(weakPeople)
+baixue = null 
+console.log(weakPeople)
+```
+
+![](../img/weakSet2.png)
+
+## Map
+
+Map和Set是非常像的，但是Map存储的是键值对，它的key可以是任意类型的元素。
+
+* .get(key) 获取value值
+* .size 获取元素数量
+* .has 判断是否有某个元素
+* .clear
+支持ForEach和For of遍历
+
+应用场景：存储元数据
