@@ -299,6 +299,24 @@
 
 2.data中的数据是可读可写的；props中的属性只是可读的，无法重新赋值，重新赋值会报错（也就是说，子组件不要直接去修改父组件中的数据）。
 
+**3.子组件在拿到父组件传回来的值，保存在props属性中后，如果还需要先对值进行处理，然后再渲染到页面上的话，可以通过watch来接受该值，然后进行处理**
+
+```
+props: ['chartData'],
+    data(){
+      return {
+        cData: []
+      }
+    },
+    watch: {
+      chartData: function(newVal,oldVal){
+        this.cData = newVal; //newVal即是chartData
+        this.drawChart();
+      }
+    }
+
+```
+
 ## 父组件向子组件传递方法
 
 具体步骤：
