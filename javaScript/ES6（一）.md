@@ -45,7 +45,18 @@ b = 2;
 console.log(a)//Uncaught TypeError: Assignment to constant variable.
 ```
 
-但这并不意味着const就一定是不可更改的，我们来看一下以下代码：
+当然，let可以重新赋值并不意味着它可以被重新声明，当我们在同一个作用域下重新声明时，会抛出语法错误。但是在内嵌的代码块重新声明，是可以被接受的。
+
+```
+var count = 30;
+let count = 20;//语法错误
+if(condition){
+	let count = 20;//遮盖了全局作用域的count值，所以不会报错。
+}
+
+```
+
+const并不一定是不可更改的，我们来看一下以下代码：
 
 ```
 const person = {
@@ -64,6 +75,8 @@ console.log(person.age)//19
 const bx2651 = Object.freeze(person)
 
 ```
+我们知道，var的声明会被提升到它的作用域顶部，但是let和const不会，因此，我们通常会把他们的声明语句放在代码块的顶部，以便整个作用域都可以访问的到。
+
 
 那么要如何使用这三者呢？
 
