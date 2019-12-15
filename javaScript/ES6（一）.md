@@ -249,7 +249,35 @@ const {name,age} = bx;
 
 ```
 
-需要注意的是，我们不能提前声明name和age,否则会报错。name和age的顺序可以随意写，编译器会自动帮我们寻找同名的属性。有时候，name变量已经被别人使用过了，我们没办法使用name属性，那我们可以给name重新命名一下：
+需要注意的是，我们不能提前声明name和age,否则会报错。name和age的顺序可以随意写，编译器会自动帮我们寻找同名的属性。
+
+当然，我们只要声明了等号左边的花括号，就必须给他赋值,否则会报错：
+
+```
+const {name , age}//Missing initializer in destructuring declaration
+```
+
+如果我们已经提前声明了name和age,我们想给他们重新赋值，那么我们需要这么写：
+
+```
+let people = {
+    name:"baixue",
+    age:18
+}
+
+let name="Michelle";
+let age = 20;
+
+({name , age} = people)
+
+console.log(name,age)
+
+```
+
+一定要给赋值的语句加一对小括号，这是因为在JS中，一对开放的花括号被视为一个语法块，而语法规定，代码块不允许出现在赋值语句的左侧，加上小括号之后可以将语法块转换为一个表达式，从而实现结构赋值的过程。
+
+
+有时候，name变量已经被别人使用过了，我们没办法使用name属性，那我们可以给name重新命名一下：
 
 ```
 const {name:n,age} = bx;
