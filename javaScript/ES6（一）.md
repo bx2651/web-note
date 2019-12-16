@@ -357,6 +357,31 @@ for(let fruit of fruits){
 ```
 for of相对于for循环，写起来更加简单，而相对于forEach,他支持终止和跳过，相对于for of循环，他每一次循环的是属性值，不会遍历出非index的属性。
 
+## 扩展对象的功能性
+
+#### 对象字面量语法扩展
+
+```
+function creatPerson(){
+	return{
+		name:name,
+		age:age
+	}
+}
+```
+
+上面的代码可以简写为：
+
+```
+function creatPerson(){
+	return{
+		name,
+		age
+	}
+}
+
+```
+
 ## ES6中的数组的方法
 
 * Array.from()这个方法可以将类数组对象或字符串等转换为数组
