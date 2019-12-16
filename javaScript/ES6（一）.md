@@ -359,13 +359,23 @@ for of相对于for循环，写起来更加简单，而相对于forEach,他支持
 
 ## 扩展对象的功能性
 
+**对象的类别如下：**
+
+* 普通对象
+* 特异对象
+* 标准对象
+* 内建对象
+
 #### 对象字面量语法扩展
 
 ```
-function creatPerson(){
+function creatPerson(name,age){
 	return{
 		name:name,
-		age:age
+		age:age,
+		sayName:function(){
+			console.log(`my name is ${name}`)
+		}
 	}
 }
 ```
@@ -373,12 +383,60 @@ function creatPerson(){
 上面的代码可以简写为：
 
 ```
-function creatPerson(){
+function creatPerson(name,age){
 	return{
 		name,
-		age
+		age,
+		sayName(){
+			console.log(`my name is ${name}`)
+		}
 	}
 }
+
+```
+
+#### 可计算属性名computed property name
+
+在ES5中，如果想要通过计算得到属性名，则需要用方括号代替点记法，有些包括某些字符串字面量作为标识符会出错，其和放在方括号中都是被允许的，如下所示：
+
+```
+let person = {}
+lastName = "last Name"
+
+person["first name"] = "bai";
+person[lastName] = "xue";
+
+console.log(person)//{ 'first name': 'bai', 'last Name': 'xue' }
+
+```
+
+
+可写为：
+
+```
+lastName = "last Name"
+
+let person = {
+    "first name":"bai",
+    [lastName] : "xue"
+}
+
+console.log(person)//{ 'first name': 'bai', 'last Name': 'xue' }
+
+```
+
+在ES6的对象字面量中使用方括号表示的该属性名称是可计算的，它的内容将被求值并最终转化为一个字符串，因而同样可以使用表达式作为属性的可计算名称,如下所示：
+
+```
+
+suffix = "Name"
+
+let person = {
+    ["first" + suffix]:"bai",
+    ["last" + suffix] : "xue"
+}
+
+console.log(person)//{ 'first name': 'bai', 'last Name': 'xue' }
 
 ```
 
