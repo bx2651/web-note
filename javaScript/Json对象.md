@@ -308,3 +308,5 @@ console.log(bookCopy.releaseDate.getFullYear())
 console.log(bookCopy2.releaseDate.getFullYear())
 ```
 ![](../img/JSON6.jpeg)
+
+**最近遇到这样一个需求：我需要从后台请求一个数组回来，但是后端返回给我的是一个和数组长的一样的字符串，我需要先把字符串转换成数组，才能使用。这个时候就可以用到parse来解析：var arr = JSON.parse(str)**
