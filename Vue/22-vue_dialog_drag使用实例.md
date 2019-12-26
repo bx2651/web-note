@@ -39,3 +39,66 @@ import mapList from "@/views/map/starter/index";
 2019-12-25
 
 弹窗包裹的内容不能有定位，否则会导致内容无法被包裹到弹窗内。
+
+
+2019-12-26
+
+官网老是找不到，复制粘贴记录一下：
+
+### Dialog Component
+
+#### Slots
+
+* title: dialog title. If you don't need formatted title, use 'title' prop.
+* button-pin: content for pin button
+* button-pinned: content for pin button when dialog is pinned
+* button-close: content for close button
+
+#### Props
+
+* id: Unique id for dialog
+* title: Dialog title
+* eventCb: Function(props Object)
+* options: Object
+* left: Number
+* top: Number
+* zIndex: Number
+* x: alias of left
+* y: alias of top
+* z: alias of zIndex
+* width: Number (0 or null to auto)
+* height: Number (0 or null to auto)
+* buttonPin: Boolean
+* buttonClose:Boolean
+* dragCursor: css cursor to show when drag is enabled
+* centered: "viewport" | "parent" , center dialog to viewport or parent element
+* pinned: Boolean, disable/enable drag
+* dropEnabled: Boolean, handle drag with mouse events, instead of drag events
+
+####Events
+
+All event emits an object: { id, left, top, x, y, z, width, height, pinned } You can format it, whith 'eventCb' prop.
+
+* load: fired on mounted
+* focus: fired on click and touch
+* pin: fired on pin / unpin dialog
+* drag-start: fired on dragstart
+* move: fired when move dialog
+* drag-end: fired on dragend
+* close: fired when close dialogs
+
+#### Css
+
+* The main container has class .dialog-drag, and .dialog-drag .fixed when dialog is pinned
+
+* You can import extra dialog styles from dist/dialog-styles.css.
+
+* view: example styles
+
+#### Drop area component
+
+* Slots
+Over: content rendered when the dialog is dragged over drop area.
+
+* Events
+drop: fired when drop the dialog, emits dialog id.
