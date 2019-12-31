@@ -102,3 +102,12 @@ Over: content rendered when the dialog is dragged over drop area.
 
 * Events
 drop: fired when drop the dialog, emits dialog id.
+
+
+https://github.com/emiliorizzo/vue-dialog-drag
+
+
+
+2019-12-31
+
+vue-dialog-drag使用的页面需要引入一下其样式文件，否则会错乱
