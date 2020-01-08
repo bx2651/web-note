@@ -103,10 +103,6 @@ const routes={
 传递参数也可以不使用router-link来传递，比如希望通过一个按钮来跳转页面并实现参数的传递，则可以这么写：
 
 ```
-<template>
-<button @click="paramsClick">购物车</button>
-<button @click="queryClick">购物车</button>
-</template>
 
 <script>
 ...
@@ -125,6 +121,12 @@ methods:{
 	}
 }
 </script>
+
+//在跳转到的页面拿传递的参数：
+mounted() {
+  console.log(this.$router.history.current.query.name);
+  },
+  this.drawFocus(this.$router.history.current.query.name);
 
 ```
 
