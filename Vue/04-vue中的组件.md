@@ -659,6 +659,61 @@ props: ['chartData'],
 </body>
 ```
 
+使用 ref 属性获取整个子组件（父组件调用子组件的方法）
+根据上面的例子，我们可以得出规律：只要ref属性加在了DOM元素身上，我们就可以获取这个DOM元素。
+
+那我们可以通过ref属性获取整个Vue子组件吗？当然可以。这样做的意义是：**在父组件中通过ref属性拿到了子组件之后，就可以进一步拿到子组件中的data和method。
+
+举例：
+
+```
+
+<body>
+    <div id="app">
+
+        <input type="button" value="点击按钮" @click="getElement">
+
+        <login-component ref="loginTemplate"></login-component>
+    </div>
+
+    <script>
+
+        // 创建 Vue 实例，得到 ViewModel
+        var vm = new Vue({
+            el: '#app',
+            data: {},
+            methods: {
+                getElement() {
+
+                    //在父组件中，通过ref获取整个子组件，进而获取子组件的data
+                    console.log(this.$refs.loginTemplate.myData)
+
+                    //在父组件中，通过ref获取整个子组件，进而获取子组件的method
+                    this.$refs.loginTemplate.showMethod()
+                }
+            },
+            components: {
+                'login-component': {
+                    template: '<h1>登录组件</h1>',
+                    data() {
+                        return {
+                            myData: '子组件的data'
+                        }
+                    },
+                    methods: {
+                        showMethod() {
+                            console.log('调用子组件的method')
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+
+```
+
 ### 子组件访问父组件：使用$parent
 在实际开发中用的非常少，因为实际开发中组件之间相互都是独立的，这种写法不够独立。
 
@@ -715,6 +770,7 @@ props: ['chartData'],
 ### 访问根组件
 
 用的也很少，一般根组件中不放东西
+
 ```
 
 <body>
@@ -763,5 +819,6 @@ props: ['chartData'],
         })
     </script>
 </body>
+
 ```
 
