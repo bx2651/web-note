@@ -3,7 +3,7 @@
 
 ```
 const data = [
-    { adName: "北京", year: 2019 },
+    { adName: "北京", year: 2019},
     { adName: "南京", year: 2022}
 ]
 
