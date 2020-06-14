@@ -5,26 +5,43 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Document</title>
+  <title></title>
 
 </head>
 
 <body>
   <style>
-    button{
-      background-color: burlywood;
-      font-size: 30px;
-    }
+
+
   </style>
   <div class="container">
-    <button>我是返回按钮</button>
-    
+    <input id="areaInput" type="text"></input>
   </div>
 
-  <script>
-    window.onload = function(){
-      let button = document.getElementsByTagName("button")[0]
+  <script type="text/javascript">
+    let myMap = new Map();
 
-    }
+    let keyObj = {};
+    let keyFunc = function () { };
+    let keyString = 'a string';
+
+    // 添加键
+    myMap.set(keyString, "和键'a string'关联的值");
+    myMap.set(keyObj, "和键keyObj关联的值");
+    myMap.set(keyFunc, "和键keyFunc关联的值");
+
+    myMap.size; // 3
+    console.log(myMap)
+
+  </script>
+
+  <script>
+    // window.onload = function () {
+    //   const areaInput = document.getElementById("areaInput")
+    //   areaInput.onchange = function(){
+    //     console.log(areaInput.value)
+    //   }
+
+    // }
   </script>
 </body>

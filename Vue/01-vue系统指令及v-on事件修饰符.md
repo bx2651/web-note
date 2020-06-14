@@ -287,6 +287,7 @@ v-on 提供了很多事件修饰符来辅助实现一些功能。事件修饰符
 PS：一个事件，允许同时使用多个事件修饰符。
 
 写法示范：
+
 ```
           <!-- click事件 -->
         <button v-on:click="doThis"></button>
@@ -310,7 +311,9 @@ PS：一个事件，允许同时使用多个事件修饰符。
         <button @click.stop.prevent="doThis"></button>
         
 ```
+
 ### 跑马灯
+
 ```
 <!DOCTYPE html>
 <html lang="en">
