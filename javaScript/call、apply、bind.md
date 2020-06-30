@@ -99,3 +99,77 @@ console.log(max,min)
 2.apply经常与数组有关，比如借助数学对象实现数组最大值和最小值。
 3.bind不调用函数，但是想改变this指向。比如定时器
 
+
+## 手写call/apply/bind方法
+
+1. call方法
+
+```
+function _call(context, ...arg) {
+  //1.将上下文赋值给this,参数可以为空
+  let _this = context || window
+  //2.此处的this指向的事_call函数的调用者，也就是外部的fn函数，将外部函数赋值给fun函数
+  _this.fun = this
+  //3.将剩余的参数传入外部的函数
+  const result = _this.fun(...arg)
+  //4.将函数删除
+  delete _this.fun
+  return result
+}
+
+let obj = {
+  name: "baixue"
+}
+
+function fn() {
+  console.log(this.name)
+}
+
+Function.prototype._call = _call
+fun._call(obj)
+```
+
+2. apply
+
+```
+    function _apply(context, arg = []) {
+      //1.将上下文赋值给this,参数可以为空
+      let _this = context || window
+      //2.此处的this指向的事_call函数的调用者，也就是外部的fun函数，将外部函数赋值给fun函数
+      _this.fun = this
+      //3.将剩余的参数传入外部的函数
+      console.log(arg)
+      const result = _this.fun(arg)
+      //4.将函数删除
+      delete _this.fun
+      
+      return result
+    }
+
+    let obj = {
+      name: "baixue"
+    }
+
+    function fun(arr) {
+      console.log(this.name,arr)
+    }
+
+    Function.prototype._apply = _call
+    fun._apply(obj, [1, 2, 3])
+```
+
+
+可以看出来，call和apply的区别仅仅是第二个参数的形式不同，call是一个一个传的，apply是数组的形式传递的。
+
+
+
+3. bind
+
+```
+function _bind(context) {
+  let _this = context || window
+  return (arg)=>{
+    this._call(context,arg)
+  }
+}
+```
