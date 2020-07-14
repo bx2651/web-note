@@ -49,8 +49,10 @@ DOM节点的获取方式其实就是**获取事件源**的方式，主要有以�
 ```
 var div1 = document.getElementByID("box1")
 //通过ID获取的元素节点只有一个，因为ID是唯一的。
+
 var div2 = document.getElementsByClassName("box2")
 //通过className获取的元素节点是一个数组，即便只有一个值也会是包含在数组当中的。
+
 var document.getElementsByTagName("box3")
 //同上
 ```
@@ -65,16 +67,19 @@ DOM节点并不是孤立的，因此可以通过DOM节点关系之间的相对�
 
 ![](https://camo.githubusercontent.com/b3a050a4c5389873bc65973f4464dec38f133512/687474703a2f2f696d672e736d79687661652e636f6d2f32303138303132365f323134352e706e67)
 
-所有的节点都只有一个父节点，调用方式就是：
+**所有的节点都只有一个父节点**，调用方式就是：
 
 ```
 Node.parentNode
 ```
 
+**每个节点都有childNode属性**，其中保存着NodeList对象，它是一个类数组对象，用于保存一组有序的节点。
 获取子节点的方式有很多，我们挑两个最重要的来看，其他的详见上图。
 
 ```
 let arr = 父节点.childNodes;//获取所有子节点
+let arr = 父节点.childNodes[0];//获取第一个子节点
+let arr = 父节点.childNodes.item(1);//获取第一个子节点
 ```
 
 这种方法返回的是指定元素子节点的集合，包括元素节点、所有属性、文本节点。在火狐、谷歌等浏览器中，换行也是子节点。
@@ -90,3 +95,138 @@ let arr2 = 父节点.children;//获取所有子节点
 
 #### 创建节点
 
+```
+let node = document.createElement("div")
+```
+
+#### 插入节点
+
+插入节点有以下几种不同的方式：
+
+**1.将节点插入到父节点最后的位置**
+
+```
+父节点.appendChild(node)
+```
+
+**2.将节点插入到特定的位置**
+
+```
+父节点.insertBefore(node,父节点.firstChild)
+```
+
+如果后面的参数为null，那么将会在父节点的最后一个位置插入一个节点。
+
+**3.用新的节点替换掉某个旧的节点**
+
+```
+父节点.replaceChild(node,父节点.firstChild)
+```
+
+要被替换的节点将从文档树中移除，该节点的所有关系指针都会从被它替换的节点复制过来，同时新的节点会占据它的位置。尽管如此，这个被替换的节点仍然在文档中，只是没有了位置。
+
+#### 删除节点
+
+```
+父节点.removeChild(node)
+```
+
+与上面替换节点相同的是，remove方法只是移除了节点在文档中的位置，并不是彻底删除了文档节点。
+
+
+#### 复制节点
+
+```
+要复制的节点.cloneNode();       //括号里不带参数和带参数false，效果是一样的。
+要复制的节点.cloneNode(true);
+```
+
+* 不带参数/带参数false：浅复制：只复制节点本身，不复制子节点。
+* 带参数true：深复制：既复制节点本身，也复制其所有的子节点。
+
+在复制完节点后，由于并没有为节点指定父节点，所以返回的节点副本属于文档所有:
+
+```
+  <div>
+    <span></span>
+  </div>
+
+
+  <script>
+
+    let span = document.getElementsByTagName("span")[0]
+    let newNode = span.cloneNode()
+    console.log(newNode.parentNode)
+  </script>
+</body>
+```
+
+上面代码打印输出的结果是null,我们需要将其通过插入节点的操作插入到文档当中，他才会拥有父节点。
+
+
+## 节点类型
+
+### Document类型
+
+该类型表示文档。在浏览器当中，document对象是HTMLDocument的一个实例，表示整个HTML页面，而且，document对象是window对象的一个属性，因此可以讲其作为全局对象来访问。
+
+Document节点具有以下特征：
+
+* nodeType的值为9
+* nodeName的值为"#document"
+* nodeValue的值为null
+* parentNode的值为null
+* ownerDocument的值为null
+
+通过这个文档对象，不仅可以取得与页面有关的信息，还能操作页面的外观及其底层结构。
+
+
+#### 文档信息
+
+通过document对象，我们可以获取一些文档的信息：
+
+```
+//取得文档的标题
+var title = document.title
+//设置文档标题
+document.title = "new title"
+
+//获取url
+var url = document.URL
+//取得域名
+var domain = document.domain
+//取得来源页面的url
+var referrer = document.referrer
+
+//在以上三者当中，只有域名是可以通过设置修改的，并且是有限制的修改。出于安全方面的限制，如果url当中包含一个子域名，比如：www.baidu.com,那么就只能将domain设置为baidu.com,而不能修改顶级域名，例如：
+
+document.domain = baidu.com//成功
+document.domain = baidu.net//失败
+```
+
+#### 查找元素
+
+```
+//通过id获取元素
+var div = document.getElementByID("id")
+
+//通过标签获取元素
+var button = document.getElementsByTagsName("button")
+
+//通过名字获取元素,document元素特有的方法，可以用来获取带name属性的标签
+var input = document.getElementsByName("color")
+```
+
+#### 特殊集合
+
+* document.anchors,包含文档中所有带name特性的a标签
+* document.forms,包含文档中所有的form元素
+* document.image
+* document.link,包含文档中所有带hraf特性的a元素
+
+#### 文档写入
+
+* document.write():原样写入
+* document.writeIn()：后面追加换行符
+* document.open():打开网页输入流
+* document.close():关闭网页输入流
