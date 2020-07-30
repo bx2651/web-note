@@ -230,3 +230,68 @@ var input = document.getElementsByName("color")
 * document.writeIn()：后面追加换行符
 * document.open():打开网页输入流
 * document.close():关闭网页输入流
+
+
+### Element类型
+
+* nodeType的值为1
+* nodeName的值为元素的标签名
+* nodeValue的值为null
+* parentNode可能是Document或Element
+
+要访问元素的标签名，可以使用nodeName或tagName属性：
+
+```
+let div = document.getElementById("myDiv")
+console.log(div.tagName == div.nodeName)
+```
+
+#### 操作特性
+
+每个元素都有一个或多个特性，这些特性的用途是给出相应元素或其内容的附加信息，操作特性的DOM方法主要有以下三个：
+
+**1.获取特性**
+
+```
+
+let div = document.getElementById("myDiv")
+
+//获取特性值
+let idName = div.getAttribute("id")
+
+```
+
+通过上面的方法，还可以取得自定义的特性。不过，特性的名称不区分大小写，id和ID是同一个特性。自定义的特性应该加上data-前缀以便验证。
+
+**2.设置特性**
+
+```
+div.setAttribute("id","myId")
+div.id = "myId2"
+```
+
+**3.删除特性**
+
+```
+div.removeAttribute("id")
+```
+
+**4.attribute属性**
+
+element类型是使用attribute属性的唯一一个DOM节点类型，其中包含一个NameNodeMap，与NodeList类似，也是一个动态的集合。元素的没一个特性都由一个Attr节点表示，每个节点都保存在NamedNodeMap对象中，NamedNodeMap对象拥有以下方法：
+
+* getNamedItem(name):返回nodeName属性等于name的节点
+* removeNamedItem(name):从列表中移除nodeName属性等于name的节点
+* setNamedItem(node):向列表中天价节点，以节点的nodeName属性为索引
+* item(pos):返回位于数字pos位置处的节点
+
+
+#### 创建元素
+
+```
+let div = document.createElement("div")
+div.id = "myDiv"
+
+```
+
+以上代码创建新元素的同时，也为新元素设置了ownerDocument属性，并且赋予了相应的信息。但是由于新元素尚未被添加到文档树中，因此设置这些特性不会影响浏览器的显示。
