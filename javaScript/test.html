@@ -1,47 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title></title>
-
-</head>
-
-<body>
-  <style>
-
-
-  </style>
-  <div class="container">
-    <input id="areaInput" type="text"></input>
+<html>
+  <div>
+    name: <input id="name" />
+    age: <input id="age" />
   </div>
+</html>
+<script>
+// 与页面绑定
+const data = {
+  name: '',
+  age: 0
+}
 
-  <script type="text/javascript">
-    let myMap = new Map();
+// 暴露到外部，便于查看效果
+window.data = data;
+window.myProxy = new Proxy(data, {
+  set(target, propKey, value) {
+    // 改变数据Model时修改页面
+    if (propKey === 'name') {
+      document.getElementById('name').value = value;
+    } else if (propKey === 'age') {
+      document.getElementById('age').value = value;
+    }
+    Reflect.set(...arguments);
+  },
+});
 
-    let keyObj = {};
-    let keyFunc = function () { };
-    let keyString = 'a string';
-
-    // 添加键
-    myMap.set(keyString, "和键'a string'关联的值");
-    myMap.set(keyObj, "和键keyObj关联的值");
-    myMap.set(keyFunc, "和键keyFunc关联的值");
-
-    myMap.size; // 3
-    console.log(myMap)
-
-  </script>
-
-  <script>
-    // window.onload = function () {
-    //   const areaInput = document.getElementById("areaInput")
-    //   areaInput.onchange = function(){
-    //     console.log(areaInput.value)
-    //   }
-
-    // }
-  </script>
-</body>
+// 页面变化改变Model内数据
+document.getElementById('name').onchange = function(e) {
+  Reflect.set(data, 'name', e.target.value);
+}
+document.getElementById('age').onchange = function(e) {
+  Reflect.set(data, 'age', e.target.value);
+}
+</script>
