@@ -1,30 +1,26 @@
-function object(o){
-  function F(){}
-  F.prototype = o
-  return new F()
-}
+let timeTool = (function() {
+  let _instance = null;
+  
+  function init() {
+    //私有变量
+    let now = new Date();
+    //公用属性和方法
+    this.name = '处理时间工具库',
+    this.getISODate = function() {
+      return now.toISOString();
+    }
+    this.getUTCDate = function() {
+      return now.toUTCString();
+    }
+  }
+  
+  return function() {
+    if(!_instance) {
+      _instance = new init();
+    }
+    return _instance;
+  }
+})()
 
-function inheritPrototype(subType,superType){
-  var prototype = object(superType.prototype)
-  prototype.constructor = subType
-  subType.prototype = prototype
-}
-
-function SuperType(name){
-  this.name = name
-  this.colors = ['red', 'blue']
-}
-SuperType.prototype.sayName = function(){
-  console.log(this.name)
-}
-
-function SubType(name,age){
-  SuperType.call(this,name)
-  this.age = age
-}
-
-inheritPrototype(SubType,SuperType)
-
-SubType.prototype.sayAge = function(){
-  console.log(this.age)
-}
+console.log(timeTool().getISODate())
+//2020-08-02T14:49:50.864Z
