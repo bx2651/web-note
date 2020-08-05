@@ -1,35 +1,45 @@
 <html>
-  <div>
-    name: <input id="name" />
-    age: <input id="age" />
-  </div>
+  <style>
+    div span{
+      color: blue !important;
+    }
+  </style>
+<div>
+  <p>
+    <span style="color:red">test</span>
+  </p>
+</div>
+
 </html>
 <script>
-// 与页面绑定
-const data = {
-  name: '',
-  age: 0
+ let factory = function (role) {
+  
+  if(this instanceof factory) {
+      var s = new this[role]();
+      return s;
+  } else {
+      return new factory(role);
+  }
 }
 
-// 暴露到外部，便于查看效果
-window.data = data;
-window.myProxy = new Proxy(data, {
-  set(target, propKey, value) {
-    // 改变数据Model时修改页面
-    if (propKey === 'name') {
-      document.getElementById('name').value = value;
-    } else if (propKey === 'age') {
-      document.getElementById('age').value = value;
-    }
-    Reflect.set(...arguments);
+factory.prototype = {
+  admin: function() {
+      this.name = '平台用户';
+      this.role = ['登录页', '主页']
+
   },
-});
+  common: function() {
+      this.name = '游客';
+      this.role = ['登录页']
+  },
+  test: function() {
+      this.name = '测试';
+      this.role =  ['登录页', '主页', '测试页'];
+      this.test = '我还有一个测试属性哦'
+  }
+}
 
-// 页面变化改变Model内数据
-document.getElementById('name').onchange = function(e) {
-  Reflect.set(data, 'name', e.target.value);
-}
-document.getElementById('age').onchange = function(e) {
-  Reflect.set(data, 'age', e.target.value);
-}
+let admin = new factory('admin');
+let common = new factory('common');
+let test = new factory('test');
 </script>
