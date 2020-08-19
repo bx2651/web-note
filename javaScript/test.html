@@ -1,29 +1,42 @@
 <html>
   <style>
-    div span{
-      color: blue !important;
+    .container{
+      display: flex;
+      justify-content: center;
+      width: 100%;
+    }
+
+    .center{
+      margin:0 30px;
+    }
+
+    .container div{
+      
     }
   </style>
-<div>
-  <p>
-    <span style="color:red">test</span>
-  </p>
+<div class="container">
+  <div style="background-color: blue;">left</div>
+  <div style="background-color: yellow;" class="center">center</div>
+  <div style="background-color: red;">right</div>
 </div>
 
 </html>
 <script>
- var obj = {};
-Object.defineProperties(obj, {
-  'property1': {
-    value: true,
-    writable: true
-  },
-  'property2': {
-    value: 'Hello',
-    writable: false
-  }
-  // etc. etc.
-});
+var Person = (function() {
+  var _gender = ''
 
-console.log(obj)
+  function P(name,gender) {
+    this.name = name
+    _gender = gender
+  }
+
+  P.prototype.getGender = function() {
+    return _gender
+  }
+  return P
+})()
+var p1 = new Person("Jack","男")
+
+p1.gender = "女"
+console.log(p1.getGender())//男
 </script>

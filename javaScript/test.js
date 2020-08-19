@@ -1,15 +1,13 @@
-function Person(name,age){
-  this.name = name
-  this.age = age
-  if(typeof this.sayName != 'function'){
-    Person.prototype.sayName=function(){
-      console.log("say name",this.name)
-    }
+var Person = (function() {
+  let _gender = Symbol('gender')
+  function P(name,gender) {
+    this.name = name
+    this[_gender] = gender
   }
-}
 
+  return P
+})()
+var p1 = new Person("Jack","男")
 
-const person = new Person()
-console.log(person) //[ 'Jack', 'Lily', 'Helen' ]
-
-
+p1.gender = "女"
+console.log(p1)//{ name: 'Jack', [Symbol(gender)]: '男' }
