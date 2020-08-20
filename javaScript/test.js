@@ -1,13 +1,5 @@
-var Person = (function() {
-  let _gender = Symbol('gender')
-  function P(name,gender) {
-    this.name = name
-    this[_gender] = gender
-  }
-
-  return P
-})()
-var p1 = new Person("Jack","男")
-
-p1.gender = "女"
-console.log(p1)//{ name: 'Jack', [Symbol(gender)]: '男' }
+const reg = /[^0-9]/
+const str = '1990'
+const str2 = '199a0'
+console.log(reg.test(str))//false
+console.log(reg.test(str2))//true
