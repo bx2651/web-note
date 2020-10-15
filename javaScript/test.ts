@@ -1,6 +1,9 @@
-function sayHi(person: string) {
-  return 'Hello, ' + person;
+class Cooker{
+  cook(){}
 }
-
-let person = 123;
-console.log(sayHi(person));
+class Person{
+  private cooker:Cooker
+  cook(){
+    this.cooker.cook()
+  }
+}
