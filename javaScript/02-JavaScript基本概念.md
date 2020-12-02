@@ -136,7 +136,7 @@ if(person!=null){
 }
 ```
 
-**undefined的值是派生自null值得，因此，在对他们进行==测试时，返回的是true:**
+**undefined的值是派生自null的，因此，在对他们进行==测试时，返回的是true:**
 
 ```
 console.log(null==undefined);//true
